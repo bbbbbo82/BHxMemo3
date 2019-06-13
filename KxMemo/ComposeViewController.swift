@@ -10,6 +10,8 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     
+    var editTarget: Memo?
+    
     @IBOutlet weak var memoTextView: UITextView!
 
     @IBAction func btnClose(_ sender: Any) {
@@ -37,6 +39,15 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //초기화코드
+        if let memo = editTarget {
+            navigationItem.title = "메모 편집"
+            memoTextView.text = memo.content
+        } else {
+            navigationItem.title = "세 메모"
+            memoTextView.text = ""
+        }
     }
     
 

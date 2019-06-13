@@ -21,7 +21,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGc-Y7-pjf">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="cfp-ar-EVP"/>
+                                    <barButtonItem systemItem="compose" id="cfp-ar-EVP">
+                                        <connections>
+                                            <segue destination="5cC-RU-W2d" kind="presentation" id="BVf-vp-cSM"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0OI-Ws-Rkt">
@@ -84,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8zG-DR-OJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1000.8" y="-610.34482758620697"/>
+            <point key="canvasLocation" x="1001" y="-662"/>
         </scene>
         <!--BHxMemo-->
         <scene sceneID="GRU-Ns-RNN">
@@ -220,4 +224,7 @@
             <point key="canvasLocation" x="1000.8" y="62.518740629685162"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BVf-vp-cSM"/>
+    </inferredMetricsTieBreakers>
 </document>
