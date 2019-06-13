@@ -23,7 +23,7 @@ class MemoListTableViewController: UITableViewController {
         if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
             
             //전달할 메모만 가져옴
-            let target = Memo.dummyMemoList[indexPath.row]
+            let target = DataManager.shared.memoList[indexPath.row]
             //destination속성을 DetailViewController캐스팅 후 memo속성에 저장
             if let vc = segue.destination as? DetailViewController {
                 vc.memo = target
@@ -44,6 +44,9 @@ class MemoListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //화면이 표시되기 직전에 업데이트됨
+        
+        //배열에 저장된 데이터를 기반으로 테이블뷰가 업데이트됨
+        DataManager.shared.fetchMemo()
         tableView.reloadData()
     }
 
@@ -53,16 +56,17 @@ class MemoListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Memo.dummyMemoList.count
+        return DataManager.shared.memoList.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-      let target = Memo.dummyMemoList[indexPath.row]
+      let target = DataManager.shared.memoList[indexPath.row]
+        
         cell.textLabel?.text = target.content
-        cell.detailTextLabel?.text = formatter.string(from: target.insertDate)
+        cell.detailTextLabel?.text = formatter.string(for: target.insertDate)
 
         return cell
     }

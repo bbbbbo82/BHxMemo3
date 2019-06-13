@@ -20,8 +20,7 @@ class ComposeViewController: UIViewController {
     @IBAction func btnSave(_ sender: Any) {
         let memo = memoTextView.text
         
-        let newMeno = Memo(content: memo ?? "")
-        Memo.dummyMemoList.append(newMeno)
+        DataManager.shared.addNewMemo(memo)        
         
         dismiss(animated: true, completion: nil)
     }

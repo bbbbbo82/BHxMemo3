@@ -13,24 +13,39 @@ class DataManager {
     static let shared = DataManager()
     private init() { }
     
-    
     var mainContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
+    //저장되어 있는 메모를 읽어오는 코드
+    
+    //읽어올 메모를 저장하는 변수 선언
     var memoList = [Memo]()
     
+    //데이터를 가져오는 메소드
     func fetchMemo() {
         let request: NSFetchRequest<Memo> = Memo.fetchRequest()
         
+        //정렬 : 날짜를 내림차순으로 정렬
         let sortByDateDesc = NSSortDescriptor(key: "insertDate", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
         
+        //fetch 메소드를 실행 (try catch로 예외처리)
         do {
             memoList = try mainContext.fetch(request)
         } catch {
             print(error)
         }
+    }
+    
+    //새로운 메모 추가
+    func addNewMemo(_ memo: String?) {
+        let newMemo = Memo(context: mainContext)
+        
+        newMemo.content = memo
+        newMemo.insertDate = Date()
+        
+        saveContext()
     }
     
     // MARK: - Core Data stack
