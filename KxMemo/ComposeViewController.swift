@@ -22,7 +22,13 @@ class ComposeViewController: UIViewController {
     @IBAction func btnSave(_ sender: Any) {
         let memo = memoTextView.text
         
-        DataManager.shared.addNewMemo(memo)        
+        //편집모드
+        if let editTarget = editTarget {
+            editTarget.content = memo
+            DataManager.shared.saveContext()
+        } else {
+            DataManager.shared.addNewMemo(memo)
+        }      
         
         dismiss(animated: true, completion: nil)
     }
@@ -41,6 +47,7 @@ class ComposeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //초기화코드
+        //편집모드
         if let memo = editTarget {
             navigationItem.title = "메모 편집"
             memoTextView.text = memo.content
