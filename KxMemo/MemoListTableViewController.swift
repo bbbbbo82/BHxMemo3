@@ -17,6 +17,19 @@ class MemoListTableViewController: UITableViewController {
         f.locale = Locale(identifier: "Ko_kr")
         return f
     }()
+    
+    //세그웨이가 연결된 화면을 생성하고 화면을 전환하기 전에 자동으로 호출
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+            
+            //전달할 메모만 가져옴
+            let target = Memo.dummyMemoList[indexPath.row]
+            //destination속성을 DetailViewController캐스팅 후 memo속성에 저장
+            if let vc = segue.destination as? DetailViewController {
+                vc.memo = target
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
